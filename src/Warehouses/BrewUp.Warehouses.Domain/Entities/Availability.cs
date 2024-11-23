@@ -7,10 +7,10 @@ namespace BrewUp.Warehouses.Domain.Entities;
 
 public class Availability : AggregateRoot
 {
-	internal BeerId _beerId;
-	internal BeerName _beerName;
+	internal BeerId _beerId = default!;
+	internal BeerName _beerName = default!;
 	internal Quantity _quantity = new(0, string.Empty);
-	internal Quantity _committedForSale;
+	internal Quantity _committedForSale = default!;
 
 	protected Availability()
 	{

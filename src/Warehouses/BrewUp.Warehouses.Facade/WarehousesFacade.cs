@@ -3,13 +3,15 @@ using BrewUp.Shared.CustomTypes;
 using BrewUp.Shared.DomainIds;
 using BrewUp.Shared.Entities;
 using BrewUp.Shared.ReadModel;
+using BrewUp.Warehouses.Domain.DomainServices;
 using BrewUp.Warehouses.SharedKernel.Commands;
 using BrewUp.Warehouses.SharedKernel.Contracts;
 using Muflone.Persistence;
 
 namespace BrewUp.Warehouses.Facade;
 
-public sealed class WarehousesFacade(IServiceBus serviceBus,
+public sealed class WarehousesFacade(IBrewUpCommandHandler<CreateBeerAvailability> createBeerAvailability,
+	IBrewUpCommandHandler<UpdateAvailabilityDueToProductionOrder> updateBeerAvailability,
 	IQueries<ReadModel.Dtos.Availability> queries) : IWarehousesFacade
 {
 
@@ -24,14 +26,15 @@ public sealed class WarehousesFacade(IServiceBus serviceBus,
 				new(new BeerId(new Guid(availability.BeerId)), Guid.NewGuid(), new BeerName(availability.BeerName),
 					availability.Quantity);
 
-			await serviceBus.SendAsync(command, cancellationToken);			
+			await updateBeerAvailability.HandleAsync(command, cancellationToken);
 		}
 		else
 		{
 			CreateBeerAvailability command =
 				new(new BeerId(new Guid(availability.BeerId)), Guid.NewGuid(), new BeerName(availability.BeerName),
 					availability.Quantity);
-			await serviceBus.SendAsync(command, cancellationToken);
+			
+			await createBeerAvailability.HandleAsync(command, cancellationToken);
 		}
 	}
 

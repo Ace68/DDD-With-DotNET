@@ -33,19 +33,9 @@ public static class RabbitMqHelper
 		var consumers = serviceProvider.GetRequiredService<IEnumerable<IConsumer>>();
 		consumers = consumers.Concat(new List<IConsumer>
 		{
-			new CreateBeerAvailabilityConsumer(repository,
-				connectionFactory,
-				loggerFactory),
 			new BeerAvailabilityCreatedConsumer(serviceProvider.GetRequiredService<IAvailabilityService>(),
 				connectionFactory,
 				loggerFactory),
-			
-			new UpdateAvailabilityDueToProductionOrderConsumer(repository,
-				connectionFactory,
-				loggerFactory),
-			new AvailabilityUpdatedDueToProductionOrderConsumer(serviceProvider.GetRequiredService<IAvailabilityService>(),
-				serviceProvider.GetRequiredService<IEventBus>(),
-				connectionFactory, loggerFactory),
 			
 			new AskForAvailabilityConsumer(repository,
 				connectionFactory,
