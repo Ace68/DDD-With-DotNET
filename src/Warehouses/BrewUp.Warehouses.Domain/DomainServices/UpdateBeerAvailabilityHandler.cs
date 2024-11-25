@@ -4,7 +4,7 @@ using Muflone.Persistence;
 
 namespace BrewUp.Warehouses.Domain.DomainServices;
 
-public sealed class UpdateBeerAvailabilityHandler<UpdateAvailabilityDueToProductionOrder>(IRepository repository,
+public sealed class UpdateBeerAvailabilityHandler(IRepository repository,
     ILoggerFactory loggerFactory)
     : BrewUpCommandHandlerBase<SharedKernel.Commands.UpdateAvailabilityDueToProductionOrder>(repository, loggerFactory)
 {

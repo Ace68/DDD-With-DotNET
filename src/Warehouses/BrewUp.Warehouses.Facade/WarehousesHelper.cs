@@ -26,7 +26,7 @@ public static class WarehousesHelper
 			.AddScoped<IBrewUpCommandHandler<CreateBeerAvailability>,
 				CreateBeerAvailabilityHandler<CreateBeerAvailability>>();
 		services.AddScoped<IBrewUpCommandHandler<UpdateAvailabilityDueToProductionOrder>,
-			UpdateBeerAvailabilityHandler<UpdateAvailabilityDueToProductionOrder>>();
+			UpdateBeerAvailabilityHandler>();
 
 		services.AddScoped<IWarehousesFacade, WarehousesFacade>();
 		services.AddScoped<IAvailabilityService, AvailabilityService>();

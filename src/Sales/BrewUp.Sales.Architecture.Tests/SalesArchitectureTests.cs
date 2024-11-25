@@ -10,7 +10,7 @@ public class SalesArchitectureTests
     [Fact]
     public void SalesProjects_Should_Having_Namespace_StartingWith_BrewUp_Sales()
     {
-        var sourceModulePath = Path.Combine(VisualStudioProvider.TryGetSolutionDirectoryInfo().FullName, "Sales");
+        var sourceModulePath = Path.Combine(ProjectFileProvider.TryGetSolutionDirectoryInfo().FullName, "Sales");
         var subFolders = Directory.GetDirectories(sourceModulePath);
 
         var netVersion = Environment.Version;
@@ -56,7 +56,7 @@ public class SalesArchitectureTests
         Assert.True(result);
     }
 
-    private static class VisualStudioProvider
+    private static class ProjectFileProvider
     {
         public static DirectoryInfo TryGetSolutionDirectoryInfo(string? currentPath = null)
         {
