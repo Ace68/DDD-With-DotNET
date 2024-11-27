@@ -1,9 +1,5 @@
-﻿using BrewUp.Sales.Facade.Validators;
-using BrewUp.Shared.Contracts;
-using FluentValidation;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 
 namespace BrewUp.Sales.Facade.Endpoints;
 
@@ -22,7 +18,7 @@ public static class SalesEndpoints
 		return app;
 	}
 
-	public static async Task<IResult> HandleGetOrders(
+	private static async Task<IResult> HandleGetOrders(
 		ISalesFacade salesUpFacade,
 		CancellationToken cancellationToken)
 	{
